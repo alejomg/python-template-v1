@@ -3,19 +3,19 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
-    # Definimos las variables y sus tipos (validación automática)
+    # Define variables and their types (automatic validation)
     PROJECT_NAME: str
     DEBUG: bool = False
     #add more entries from .env
     #DATABASE_URL: str
     #SECRET_KEY: str
 
-    # Configuración para leer el archivo .env
+    # Setup to read the .env file
     model_config = SettingsConfigDict(
         env_file=".env", 
         env_file_encoding="utf-8",
-        extra="ignore" # Ignora variables extra en el .env que no estén aquí
+        extra="ignore" # Ignore extra .env variables not listed here
     )
 
-# Instanciamos para usarlo en toda la app
+# Instantiate for global app use
 settings = Settings()

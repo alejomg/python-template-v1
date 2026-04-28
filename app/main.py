@@ -1,5 +1,3 @@
-# Punto de entrada (instancia FastAPI)
-
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from app.api.v1.endpoints import items
@@ -7,19 +5,17 @@ from app.core.config import settings
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # --- Lógica de ARRANQUE (Startup) ---
+    # --- Startup logic ---
     print(f"starting up {settings.PROJECT_NAME}...")
-    # print("Conectando a la base de datos...")
-    # Ejemplo: await database.connect()
+    # print("Connecting to DB...")
+    # Example: await database.connect()
     
-    yield  # Aquí es donde la aplicación "vive" y atiende peticiones
+    yield  # Here the app runs and serves requests
     
-    # --- Lógica de CIERRE (Shutdown) ---
+    # --- Shutdown logic ---
     print(f"shutting down {settings.PROJECT_NAME}...")
-    # print("Cerrando recursos y limpieza...")
+    # print("Closing resources and cleanup...")
     # Ejemplo: await database.disconnect()
-
-#app = FastAPI(lifespan=lifespan)
 
 app = FastAPI(
     lifespan=lifespan,
@@ -27,13 +23,15 @@ app = FastAPI(
     debug=settings.DEBUG
 )
 
-#para que los router sean visibles
-app.include_router(items.router, prefix="/api/v1/items", tags=["Items"])
+#make routers visible
+app.include_router(items.router, prefix="/api/v1/item", tags=["Item"])
+
 
 @app.get("/")
 def root():
     return {"message": "API Online"}
-    
+
+
 @app.get("/config-check")
 def check_config():
     return {"app_name": settings.PROJECT_NAME}

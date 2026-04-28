@@ -1,1 +1,1 @@
-# JWT, hashing de passwords
+# JWT, passwords hashing
