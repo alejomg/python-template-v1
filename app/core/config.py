@@ -6,8 +6,9 @@ class Settings(BaseSettings):
     # Definimos las variables y sus tipos (validación automática)
     PROJECT_NAME: str
     DEBUG: bool = False
-    DATABASE_URL: str
-    SECRET_KEY: str
+    #add more entries from .env
+    #DATABASE_URL: str
+    #SECRET_KEY: str
 
     # Configuración para leer el archivo .env
     model_config = SettingsConfigDict(
